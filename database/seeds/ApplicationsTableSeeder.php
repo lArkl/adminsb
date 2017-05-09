@@ -1,11 +1,10 @@
 <?php
 
-use Database\traits\TruncateTable;
-use Database\traits\DisableForeignKeys;
+//use Carbon\Carbon as Carbon;
 
-use Carbon\Carbon as Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class ApplicationsTableSeeder extends Seeder
 {
@@ -16,32 +15,25 @@ class ApplicationsTableSeeder extends Seeder
      */
     public function run()
     {
-        /*factory(App\Application::class, 2)
-        ->create()->each(function($u) {
-    			$u->applications()->save(factory(App\Applications::class)->make());
-  			});
-  			factory(App\Application::class, 50)->create()->each(function ($u) {
-        $u->applications()->save(factory(App\Applications::class)->make());});*/
+        $faker=Faker::create();
         
-       $users = [
-            
-                'first_name' => str_random(10),
-                'middle_name' => str_random(10),
-                'first_surname' => str_random(10),
-                'second_surname' => str_random(10),
-                'birth_date' => str_random(10),
-                'document' => str_random(10),
-                'home_phone' => str_random(10),
-                'mobile_phone' => str_random(10),
-                'email' => str_random(10).'@gmail.com',
-                'workshop_name' => str_random(10),
-                'status' => 'pending',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-        ];
-
-        DB::table('applications')->insert($users);
-
-        //$this->enableForeignKeys();
+        foreach(range(1,300) as $index){
+          DB::table('applications')->insert([
+            'first_name' => $faker->firstName,
+            'middle_name' => $faker->firstName,
+            'first_surname' => $faker->lastName,
+            'second_surname' => $faker->lastName,
+            'birth_date' => $faker->date,
+            'document' => $faker->numberBetween(100,400),//making sure of redundancy
+            'home_phone' => $faker->phoneNumber,
+            'mobile_phone' => $faker->phoneNumber,
+            'email' => $faker->safeEmail,
+            'workshop_name' => $faker->randomElement(
+              $array=array('Angular2','Laravel','VueJs','UML','Java','Spring', 'LaTex')),
+            'status' => 'pending',
+            'created_at' => $faker->dateTime($max='now'),
+            'updated_at' => $faker->dateTime($max='now'), 
+          ]);
+        }
     }
 }

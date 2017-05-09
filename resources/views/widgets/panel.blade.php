@@ -21,4 +21,3 @@
 		<div class="panel-footer">@yield ($as . '_panel_footer')</div>
 	@endif
 </div>
-
