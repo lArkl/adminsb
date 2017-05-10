@@ -15178,7 +15178,7 @@ var lineChartData = {
             pointStrokeColor: "#fff",
             pointHighlightFill : "#fff",
             pointHighlightStroke : "rgba(244, 204, 11, 1)",
-            data : [28,48,40,19,86,27,90]
+            data : [28,48,40,19,86,67,90]
         }
     ]
 
@@ -15239,13 +15239,17 @@ new Chart(cdonut).Doughnut(ddata, { responsive: true});
 
 var bdata = {
         labels : ["January","February","March","April","May","June","July"],
+        //labels :{!! json_encode($labels) !!},
+        //JSON.parse('{{ json_encode($labels) }}'),
         datasets : [
             {
                 fillColor: "rgba(220,220,220,0.5)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data : [130,160,95,205,170,135,200]
+                data : [100,160,95,205,170,135,200]
+				//JSON.parse('{{ json_encode($data) }}');
+                //data :
             },
             {
                fillColor: "rgba(151,187,205,0.5)",

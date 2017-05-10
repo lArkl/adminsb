@@ -31,8 +31,8 @@ class ApplicationsTableSeeder extends Seeder
             'workshop_name' => $faker->randomElement(
               $array=array('Angular2','Laravel','VueJs','UML','Java','Spring', 'LaTex')),
             'status' => 'pending',
-            'created_at' => $faker->dateTime($max='now'),
-            'updated_at' => $faker->dateTime($max='now'), 
+            'created_at' => $faker->dateTimeThisYear($max='now'),
+            'updated_at' => $faker->dateTimeThisMonth($max='now'), 
           ]);
         }
     }

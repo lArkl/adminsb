@@ -3,6 +3,33 @@
 @section('section')
 <div class="col-sm-12">	
 	<div class="row">
+		{{$labels}}
+
+		<canvas id="daily-reports" height="300" width="1100"></canvas>
+		{{--<script src="../../js/chart.js"></script>--}}
+		<script src="https://raw.githubusercontent.com/nnnick/Chart.js/master/dist/Chart.bundle.js"></script>
+		<script type="text/javascript">
+		    (function() {
+		         var ctx = document.getElementById('daily-reports').getContext('2d');
+		         var chart = {
+		         	labels : ["January","February","March","April","May","June","July"],
+        			//labels: {!! $labels !!},
+		            datasets: [{
+		                data : [100,160,95,205,170,135,200],
+		                fillColor : "#94646D",
+		                strokeColor : "#A37079",
+		                pointColor : "#BC808B",
+		                showTooltips: true,
+		                responsive: false
+		            }]
+		         };
+
+		         new Chart(ctx).Line(chart);
+		    });
+		</script>
+
+
+
 		<div class="col-sm-6">
 			@section ('cchart1_panel_title','Line Chart')
 			@section ('cchart1_panel_body')

@@ -15,12 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', function () {
-    return view('layouts.dashboard');
+    return view('home');
 });
-
+/*
 Route::get('/charts', function () {
     return view('mcharts');
-});
+});*/
+Route::get('/charts', 'ApplicationController@data');
+
 Route::get('/tables', 'ApplicationController@index');
 
 Route::get('/forms', function()
@@ -77,5 +79,3 @@ Route::get('/documentation', function()
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
-

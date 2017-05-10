@@ -35,6 +35,13 @@ class ApplicationController extends Controller
         }
     }
 
+    public function data()
+    {
+        $labels=Application::groupBy('workshop_name')->pluck('workshop_name');
+        $datacount=Application::all()->groupBy('workshop_name')->count();
+        return view('mcharts')->with('datacount',$datacount)->with('labels',json_encode($labels));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
