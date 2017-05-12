@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('home');
-});
+Route::get('/dashboard', 'ApplicationController@dashboard');
 /*
 Route::get('/charts', function () {
     return view('mcharts');

@@ -3,33 +3,64 @@
 @section('section')
 <div class="col-sm-12">	
 	<div class="row">
-		{{$labels}}
-
 		<canvas id="daily-reports" height="300" width="1100"></canvas>
-		{{--<script src="../../js/chart.js"></script>--}}
-		<script src="https://raw.githubusercontent.com/nnnick/Chart.js/master/dist/Chart.bundle.js"></script>
-		<script type="text/javascript">
-		    (function() {
-		         var ctx = document.getElementById('daily-reports').getContext('2d');
-		         var chart = {
-		         	labels : ["January","February","March","April","May","June","July"],
-        			//labels: {!! $labels !!},
-		            datasets: [{
-		                data : [100,160,95,205,170,135,200],
-		                fillColor : "#94646D",
-		                strokeColor : "#A37079",
-		                pointColor : "#BC808B",
-		                showTooltips: true,
-		                responsive: false
-		            }]
-		         };
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>		
+		<script>
 
-		         new Chart(ctx).Line(chart);
-		    });
+			var chart = {
+					labels: {!! $labels !!},
+		            datasets: [
+		            	{
+			                data : [100,160,95,205,170,135,200],
+			                backgroundColor: [
+				                'rgba(255, 99, 132, 0.2)',
+				                'rgba(54, 162, 235, 0.2)',
+				                'rgba(255, 206, 86, 0.2)',
+				                'rgba(75, 192, 192, 0.2)',
+				                'rgba(153, 102, 255, 0.2)',
+				                'rgba(255, 206, 86, 0.2)',
+				                'rgba(255, 159, 64, 0.2)'
+            				],
+				            /*borderColor: [
+				                'rgba(255,99,132,1)',
+				                'rgba(54, 162, 235, 1)',
+				                'rgba(255, 206, 86, 1)',
+				                'rgba(75, 192, 192, 1)',
+				                'rgba(153, 102, 255, 1)',
+				                'rgba(54, 162, 235, 1)',
+				                'rgba(255, 159, 64, 1)'
+				            ],*/
+			                strokeColor: "rgba(151,187,205,0.8)",
+			                highlightFill: "rgba(151,187,205,0.75)",
+			                highlightStroke: "rgba(151,187,205,1)",
+						    //showTooltips: true,
+			                responsive: true
+		            	}
+		            ]
+		         };
+			var ctx = document.getElementById('daily-reports').getContext('2d');
+			var ShowChart = new Chart(ctx , {
+    			type: "pie",
+    			data: chart, 
+    			options: {
+				    legend: {
+				        display: false,
+				        labels: {
+			    	        fontColor: 'rgb(255, 99, 132)'
+            			}
+            		},
+            		title: {
+ 					   display: true,
+            			text: 'Applications per Workshop'
+        			}
+        	 	}
+			});
+
+		    
 		</script>
 
 
-
+		{{--
 		<div class="col-sm-6">
 			@section ('cchart1_panel_title','Line Chart')
 			@section ('cchart1_panel_body')
@@ -56,6 +87,8 @@
 			@endsection
 			@include('widgets.panel', array('header'=>true, 'as'=>'cchart4'))
 		</div> 
+		--}}
+		
 	</div>
 	
 	

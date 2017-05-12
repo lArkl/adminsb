@@ -35,6 +35,12 @@ class ApplicationController extends Controller
         }
     }
 
+    public function dashboard(Request $request)
+    {
+        $datacount=Application::all()->count();
+        return view('home')->with('datacount',$datacount);
+    }
+
     public function data()
     {
         $labels=Application::groupBy('workshop_name')->pluck('workshop_name');
