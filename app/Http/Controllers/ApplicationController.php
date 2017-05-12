@@ -41,11 +41,22 @@ class ApplicationController extends Controller
         return view('home')->with('datacount',$datacount);
     }
 
-    public function data()
+    public function chart()
     {
         $labels=Application::groupBy('workshop_name')->pluck('workshop_name');
-        $datacount=Application::all()->groupBy('workshop_name')->count();
-        return view('mcharts')->with('datacount',$datacount)->with('labels',json_encode($labels));
+        $applications=Application::all();
+        $cworkshops=collect([]);
+        $colors=collect([]);
+        function rand_color() {
+            return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+        }
+
+        foreach($labels as $label){
+            $datacount=Application::where('workshop_name',$label)->get()->count();
+            $cworkshops->push($datacount);
+            $colors->push(rand_color());
+        }
+        return view('mcharts')->with('cworkshops',json_encode($cworkshops))->with('labels',json_encode($labels))->with('colors',json_encode($colors));
     }
 
     /**

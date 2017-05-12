@@ -19,7 +19,7 @@ Route::get('/dashboard', 'ApplicationController@dashboard');
 Route::get('/charts', function () {
     return view('mcharts');
 });*/
-Route::get('/charts', 'ApplicationController@data');
+Route::get('/charts', 'ApplicationController@chart');
 
 Route::get('/tables', 'ApplicationController@index');
 
