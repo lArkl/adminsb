@@ -37,8 +37,10 @@ class ApplicationController extends Controller
 
     public function dashboard(Request $request)
     {
-        $datacount=Application::all()->count();
-        return view('home')->with('datacount',$datacount);
+        $nApps=Application::all()->count();
+        $nWork=Application::groupBy('workshop_name')->pluck('workshop_name')->count();
+        $nStatus=Application::where('status','pending')->count();
+        return view('home')->with('nApps',$nApps)->with('nWork',$nWork)->with('nStatus',$nStatus);
     }
 
     public function chart()
@@ -47,6 +49,7 @@ class ApplicationController extends Controller
         $applications=Application::all();
         $cworkshops=collect([]);
         $colors=collect([]);
+        $dates=collect([]);
         function rand_color() {
             return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
         }
@@ -55,6 +58,7 @@ class ApplicationController extends Controller
             $datacount=Application::where('workshop_name',$label)->get()->count();
             $cworkshops->push($datacount);
             $colors->push(rand_color());
+            //$dates->push(Application::where('workshop_name',$label)->get());
         }
         return view('mcharts')->with('cworkshops',json_encode($cworkshops))->with('labels',json_encode($labels))->with('colors',json_encode($colors));
     }

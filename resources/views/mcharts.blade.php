@@ -13,9 +13,9 @@
 			@include('widgets.panel', array('header'=>true, 'as'=>'cchart3'))
 		</div>
 		<div class="col-sm-6">
-			@section ('cchart3_panel_title','Line Chart')
+			@section ('cchart3_panel_title','Bar Chart')
 			@section ('cchart3_panel_body')
-			<div style="max-width:800px; margin:0 auto;">@include('widgets.charts.linechart')</div>
+			<div style="max-width:800px; margin:0 auto;">@include('widgets.charts.cbarchart')</div>
 			@endsection
 			@include('widgets.panel', array('header'=>true, 'as'=>'cchart3'))
 		</div>
