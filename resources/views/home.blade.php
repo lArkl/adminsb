@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('page_heading','Dashboard')
 @section('section')
-           
+          
             <!-- /.row -->
             <div class="col-sm-12">
             <div class="row">
@@ -99,14 +99,17 @@
                 @include('timeline')
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
+                    
+                    {{--
                     @section ('cchart11_panel_title','Line Chart')
                     @section ('cchart11_panel_body')
                     @include('widgets.charts.clinechart')
                     @endsection
                     @include('widgets.panel', array('header'=>true, 'as'=>'cchart11'))
+                    --}}
                     @section ('pane1_panel_title', 'Notifications Panel')
                     @section ('pane1_panel_body')
-                     
+                    
                         
                             <div class="list-group">
                                 <a href="#" class="list-group-item">

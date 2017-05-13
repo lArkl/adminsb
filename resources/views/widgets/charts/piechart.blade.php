@@ -28,7 +28,7 @@
     		},
     		title: {
 				   display: true,
-    			text: 'Applications per Workshop'
+    			text: 'Total Applications per Workshop'
 			}
 	 	}
 	});    

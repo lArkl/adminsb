@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ApplicationController extends Controller
 {
@@ -49,7 +50,7 @@ class ApplicationController extends Controller
         $applications=Application::all();
         $cworkshops=collect([]);
         $colors=collect([]);
-        $dates=collect([]);
+        $aworkshops=collect([]);
         function rand_color() {
             return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
         }
@@ -57,10 +58,12 @@ class ApplicationController extends Controller
         foreach($labels as $label){
             $datacount=Application::where('workshop_name',$label)->get()->count();
             $cworkshops->push($datacount);
+            $datacount=Application::where('workshop_name',$label)->whereYear('created_at', '=', date('Y'))->count();
+            $aworkshops->push($datacount);
             $colors->push(rand_color());
             //$dates->push(Application::where('workshop_name',$label)->get());
         }
-        return view('mcharts')->with('cworkshops',json_encode($cworkshops))->with('labels',json_encode($labels))->with('colors',json_encode($colors));
+        return view('mcharts')->with('cworkshops',json_encode($cworkshops))->with('labels',json_encode($labels))->with('colors',json_encode($colors))->with('aworkshops',json_encode($aworkshops));
     }
 
     /**
